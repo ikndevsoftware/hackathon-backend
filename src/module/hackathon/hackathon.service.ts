@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -119,9 +120,32 @@ export class HackathonService {
   async remove(id: string) {
     await this.findOne(id);
 
-    return this.prisma.hackathon.delete({
-      where: { id },
-      include: hackathonInclude,
+    const projectCount = await this.prisma.project.count({
+      where: { hackathonId: id },
     });
+
+    if (projectCount > 0) {
+      throw new ConflictException(
+        'Cannot delete a hackathon that still has projects',
+      );
+    }
+
+    try {
+      return await this.prisma.hackathon.delete({
+        where: { id },
+        include: hackathonInclude,
+      });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2003'
+      ) {
+        throw new ConflictException(
+          'Cannot delete a hackathon that still has projects',
+        );
+      }
+
+      throw error;
+    }
   }
 }

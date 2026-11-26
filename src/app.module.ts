@@ -12,6 +12,7 @@ import { auth } from './lib/auth/auth.js';
 import { buildArcjetRules, type ArcjetMode } from './lib/arcjet/arcjet.rules.js';
 import { PrismaModule } from './lib/database/prisma.module.js';
 import { HackathonModule } from './module/hackathon/hackathon.module.js';
+import { ProjectModule } from './module/project/project.module.js';
 import { UserModule } from './module/user/user.module.js';
 
 const arcjetMode: ArcjetMode =
@@ -28,6 +29,7 @@ const arcjetMode: ArcjetMode =
     PrismaModule,
     UserModule,
     HackathonModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [
