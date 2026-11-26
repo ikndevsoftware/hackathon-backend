@@ -35,9 +35,8 @@ Work through these in order.
 - Add `GET /hackathon/:id/participants` so admins can see who joined.
 - Add `DELETE /hackathon/:id/join` so a participant can leave before the start date.
 - Add `GET /hackathon/mine` for hackathons a user authored or joined.
-- Reject joins before `startsAt` and when the hackathon is full.
-- Add a participant limit to the schema and enforce it on join.
-- Decide whether only one hackathon may be active at a time, and enforce it.
+- Add a participant minimum and limit to the schema and enforce it on join, the min will be 40 and the max 100..
+- Reject joins when the hackathon is full displaying the proper message to show the user that the hackathon is full.
 - Validate that `endsAt` is after `startsAt` with a custom DTO validator.
 
 ### 2. Add the missing domain pieces
