@@ -32,6 +32,7 @@ export type HackathonMinAggregateOutputType = {
   endDate: Date | null
   isActive: boolean | null
   authorId: string | null
+  scoringLockedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,6 +45,7 @@ export type HackathonMaxAggregateOutputType = {
   endDate: Date | null
   isActive: boolean | null
   authorId: string | null
+  scoringLockedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +58,7 @@ export type HackathonCountAggregateOutputType = {
   endDate: number
   isActive: number
   authorId: number
+  scoringLockedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -70,6 +73,7 @@ export type HackathonMinAggregateInputType = {
   endDate?: true
   isActive?: true
   authorId?: true
+  scoringLockedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +86,7 @@ export type HackathonMaxAggregateInputType = {
   endDate?: true
   isActive?: true
   authorId?: true
+  scoringLockedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +99,7 @@ export type HackathonCountAggregateInputType = {
   endDate?: true
   isActive?: true
   authorId?: true
+  scoringLockedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -179,6 +185,7 @@ export type HackathonGroupByOutputType = {
   endDate: Date
   isActive: boolean
   authorId: string
+  scoringLockedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: HackathonCountAggregateOutputType | null
@@ -212,11 +219,14 @@ export type HackathonWhereInput = {
   endDate?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
   isActive?: Prisma.BoolFilter<"Hackathon"> | boolean
   authorId?: Prisma.StringFilter<"Hackathon"> | string
+  scoringLockedAt?: Prisma.DateTimeNullableFilter<"Hackathon"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   participants?: Prisma.HackathonParticipantListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  criteria?: Prisma.CriterionListRelationFilter
+  judges?: Prisma.HackathonJudgeListRelationFilter
 }
 
 export type HackathonOrderByWithRelationInput = {
@@ -227,11 +237,14 @@ export type HackathonOrderByWithRelationInput = {
   endDate?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
+  scoringLockedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   author?: Prisma.UserOrderByWithRelationInput
   participants?: Prisma.HackathonParticipantOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
+  criteria?: Prisma.CriterionOrderByRelationAggregateInput
+  judges?: Prisma.HackathonJudgeOrderByRelationAggregateInput
 }
 
 export type HackathonWhereUniqueInput = Prisma.AtLeast<{
@@ -245,11 +258,14 @@ export type HackathonWhereUniqueInput = Prisma.AtLeast<{
   endDate?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
   isActive?: Prisma.BoolFilter<"Hackathon"> | boolean
   authorId?: Prisma.StringFilter<"Hackathon"> | string
+  scoringLockedAt?: Prisma.DateTimeNullableFilter<"Hackathon"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   participants?: Prisma.HackathonParticipantListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  criteria?: Prisma.CriterionListRelationFilter
+  judges?: Prisma.HackathonJudgeListRelationFilter
 }, "id">
 
 export type HackathonOrderByWithAggregationInput = {
@@ -260,6 +276,7 @@ export type HackathonOrderByWithAggregationInput = {
   endDate?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
+  scoringLockedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.HackathonCountOrderByAggregateInput
@@ -278,6 +295,7 @@ export type HackathonScalarWhereWithAggregatesInput = {
   endDate?: Prisma.DateTimeWithAggregatesFilter<"Hackathon"> | Date | string
   isActive?: Prisma.BoolWithAggregatesFilter<"Hackathon"> | boolean
   authorId?: Prisma.StringWithAggregatesFilter<"Hackathon"> | string
+  scoringLockedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Hackathon"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Hackathon"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Hackathon"> | Date | string
 }
@@ -289,11 +307,14 @@ export type HackathonCreateInput = {
   startDate: Date | string
   endDate: Date | string
   isActive?: boolean
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   author: Prisma.UserCreateNestedOneWithoutAuthoredHackathonsInput
   participants?: Prisma.HackathonParticipantCreateNestedManyWithoutHackathonInput
   projects?: Prisma.ProjectCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeCreateNestedManyWithoutHackathonInput
 }
 
 export type HackathonUncheckedCreateInput = {
@@ -304,10 +325,13 @@ export type HackathonUncheckedCreateInput = {
   endDate: Date | string
   isActive?: boolean
   authorId: string
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   participants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutHackathonInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionUncheckedCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutHackathonInput
 }
 
 export type HackathonUpdateInput = {
@@ -317,11 +341,14 @@ export type HackathonUpdateInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   author?: Prisma.UserUpdateOneRequiredWithoutAuthoredHackathonsNestedInput
   participants?: Prisma.HackathonParticipantUpdateManyWithoutHackathonNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUpdateManyWithoutHackathonNestedInput
 }
 
 export type HackathonUncheckedUpdateInput = {
@@ -332,10 +359,13 @@ export type HackathonUncheckedUpdateInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutHackathonNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUncheckedUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutHackathonNestedInput
 }
 
 export type HackathonCreateManyInput = {
@@ -346,6 +376,7 @@ export type HackathonCreateManyInput = {
   endDate: Date | string
   isActive?: boolean
   authorId: string
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -357,6 +388,7 @@ export type HackathonUpdateManyMutationInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -369,6 +401,7 @@ export type HackathonUncheckedUpdateManyInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -391,6 +424,7 @@ export type HackathonCountOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
+  scoringLockedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -403,6 +437,7 @@ export type HackathonMaxOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
+  scoringLockedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -415,6 +450,7 @@ export type HackathonMinOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
+  scoringLockedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -494,6 +530,34 @@ export type HackathonUpdateOneRequiredWithoutProjectsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.HackathonUpdateToOneWithWhereWithoutProjectsInput, Prisma.HackathonUpdateWithoutProjectsInput>, Prisma.HackathonUncheckedUpdateWithoutProjectsInput>
 }
 
+export type HackathonCreateNestedOneWithoutCriteriaInput = {
+  create?: Prisma.XOR<Prisma.HackathonCreateWithoutCriteriaInput, Prisma.HackathonUncheckedCreateWithoutCriteriaInput>
+  connectOrCreate?: Prisma.HackathonCreateOrConnectWithoutCriteriaInput
+  connect?: Prisma.HackathonWhereUniqueInput
+}
+
+export type HackathonUpdateOneRequiredWithoutCriteriaNestedInput = {
+  create?: Prisma.XOR<Prisma.HackathonCreateWithoutCriteriaInput, Prisma.HackathonUncheckedCreateWithoutCriteriaInput>
+  connectOrCreate?: Prisma.HackathonCreateOrConnectWithoutCriteriaInput
+  upsert?: Prisma.HackathonUpsertWithoutCriteriaInput
+  connect?: Prisma.HackathonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HackathonUpdateToOneWithWhereWithoutCriteriaInput, Prisma.HackathonUpdateWithoutCriteriaInput>, Prisma.HackathonUncheckedUpdateWithoutCriteriaInput>
+}
+
+export type HackathonCreateNestedOneWithoutJudgesInput = {
+  create?: Prisma.XOR<Prisma.HackathonCreateWithoutJudgesInput, Prisma.HackathonUncheckedCreateWithoutJudgesInput>
+  connectOrCreate?: Prisma.HackathonCreateOrConnectWithoutJudgesInput
+  connect?: Prisma.HackathonWhereUniqueInput
+}
+
+export type HackathonUpdateOneRequiredWithoutJudgesNestedInput = {
+  create?: Prisma.XOR<Prisma.HackathonCreateWithoutJudgesInput, Prisma.HackathonUncheckedCreateWithoutJudgesInput>
+  connectOrCreate?: Prisma.HackathonCreateOrConnectWithoutJudgesInput
+  upsert?: Prisma.HackathonUpsertWithoutJudgesInput
+  connect?: Prisma.HackathonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HackathonUpdateToOneWithWhereWithoutJudgesInput, Prisma.HackathonUpdateWithoutJudgesInput>, Prisma.HackathonUncheckedUpdateWithoutJudgesInput>
+}
+
 export type HackathonCreateWithoutAuthorInput = {
   id?: string
   name: string
@@ -501,10 +565,13 @@ export type HackathonCreateWithoutAuthorInput = {
   startDate: Date | string
   endDate: Date | string
   isActive?: boolean
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   participants?: Prisma.HackathonParticipantCreateNestedManyWithoutHackathonInput
   projects?: Prisma.ProjectCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeCreateNestedManyWithoutHackathonInput
 }
 
 export type HackathonUncheckedCreateWithoutAuthorInput = {
@@ -514,10 +581,13 @@ export type HackathonUncheckedCreateWithoutAuthorInput = {
   startDate: Date | string
   endDate: Date | string
   isActive?: boolean
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   participants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutHackathonInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionUncheckedCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutHackathonInput
 }
 
 export type HackathonCreateOrConnectWithoutAuthorInput = {
@@ -557,6 +627,7 @@ export type HackathonScalarWhereInput = {
   endDate?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
   isActive?: Prisma.BoolFilter<"Hackathon"> | boolean
   authorId?: Prisma.StringFilter<"Hackathon"> | string
+  scoringLockedAt?: Prisma.DateTimeNullableFilter<"Hackathon"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hackathon"> | Date | string
 }
@@ -568,10 +639,13 @@ export type HackathonCreateWithoutParticipantsInput = {
   startDate: Date | string
   endDate: Date | string
   isActive?: boolean
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   author: Prisma.UserCreateNestedOneWithoutAuthoredHackathonsInput
   projects?: Prisma.ProjectCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeCreateNestedManyWithoutHackathonInput
 }
 
 export type HackathonUncheckedCreateWithoutParticipantsInput = {
@@ -582,9 +656,12 @@ export type HackathonUncheckedCreateWithoutParticipantsInput = {
   endDate: Date | string
   isActive?: boolean
   authorId: string
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionUncheckedCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutHackathonInput
 }
 
 export type HackathonCreateOrConnectWithoutParticipantsInput = {
@@ -610,10 +687,13 @@ export type HackathonUpdateWithoutParticipantsInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   author?: Prisma.UserUpdateOneRequiredWithoutAuthoredHackathonsNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUpdateManyWithoutHackathonNestedInput
 }
 
 export type HackathonUncheckedUpdateWithoutParticipantsInput = {
@@ -624,9 +704,12 @@ export type HackathonUncheckedUpdateWithoutParticipantsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUncheckedUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutHackathonNestedInput
 }
 
 export type HackathonCreateWithoutProjectsInput = {
@@ -636,10 +719,13 @@ export type HackathonCreateWithoutProjectsInput = {
   startDate: Date | string
   endDate: Date | string
   isActive?: boolean
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   author: Prisma.UserCreateNestedOneWithoutAuthoredHackathonsInput
   participants?: Prisma.HackathonParticipantCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeCreateNestedManyWithoutHackathonInput
 }
 
 export type HackathonUncheckedCreateWithoutProjectsInput = {
@@ -650,9 +736,12 @@ export type HackathonUncheckedCreateWithoutProjectsInput = {
   endDate: Date | string
   isActive?: boolean
   authorId: string
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   participants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionUncheckedCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutHackathonInput
 }
 
 export type HackathonCreateOrConnectWithoutProjectsInput = {
@@ -678,10 +767,13 @@ export type HackathonUpdateWithoutProjectsInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   author?: Prisma.UserUpdateOneRequiredWithoutAuthoredHackathonsNestedInput
   participants?: Prisma.HackathonParticipantUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUpdateManyWithoutHackathonNestedInput
 }
 
 export type HackathonUncheckedUpdateWithoutProjectsInput = {
@@ -692,9 +784,172 @@ export type HackathonUncheckedUpdateWithoutProjectsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUncheckedUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutHackathonNestedInput
+}
+
+export type HackathonCreateWithoutCriteriaInput = {
+  id?: string
+  name: string
+  description?: string | null
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  scoringLockedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  author: Prisma.UserCreateNestedOneWithoutAuthoredHackathonsInput
+  participants?: Prisma.HackathonParticipantCreateNestedManyWithoutHackathonInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeCreateNestedManyWithoutHackathonInput
+}
+
+export type HackathonUncheckedCreateWithoutCriteriaInput = {
+  id?: string
+  name: string
+  description?: string | null
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  authorId: string
+  scoringLockedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  participants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutHackathonInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutHackathonInput
+  judges?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutHackathonInput
+}
+
+export type HackathonCreateOrConnectWithoutCriteriaInput = {
+  where: Prisma.HackathonWhereUniqueInput
+  create: Prisma.XOR<Prisma.HackathonCreateWithoutCriteriaInput, Prisma.HackathonUncheckedCreateWithoutCriteriaInput>
+}
+
+export type HackathonUpsertWithoutCriteriaInput = {
+  update: Prisma.XOR<Prisma.HackathonUpdateWithoutCriteriaInput, Prisma.HackathonUncheckedUpdateWithoutCriteriaInput>
+  create: Prisma.XOR<Prisma.HackathonCreateWithoutCriteriaInput, Prisma.HackathonUncheckedCreateWithoutCriteriaInput>
+  where?: Prisma.HackathonWhereInput
+}
+
+export type HackathonUpdateToOneWithWhereWithoutCriteriaInput = {
+  where?: Prisma.HackathonWhereInput
+  data: Prisma.XOR<Prisma.HackathonUpdateWithoutCriteriaInput, Prisma.HackathonUncheckedUpdateWithoutCriteriaInput>
+}
+
+export type HackathonUpdateWithoutCriteriaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  author?: Prisma.UserUpdateOneRequiredWithoutAuthoredHackathonsNestedInput
+  participants?: Prisma.HackathonParticipantUpdateManyWithoutHackathonNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUpdateManyWithoutHackathonNestedInput
+}
+
+export type HackathonUncheckedUpdateWithoutCriteriaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  participants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutHackathonNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutHackathonNestedInput
+}
+
+export type HackathonCreateWithoutJudgesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  scoringLockedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  author: Prisma.UserCreateNestedOneWithoutAuthoredHackathonsInput
+  participants?: Prisma.HackathonParticipantCreateNestedManyWithoutHackathonInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionCreateNestedManyWithoutHackathonInput
+}
+
+export type HackathonUncheckedCreateWithoutJudgesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  authorId: string
+  scoringLockedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  participants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutHackathonInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutHackathonInput
+  criteria?: Prisma.CriterionUncheckedCreateNestedManyWithoutHackathonInput
+}
+
+export type HackathonCreateOrConnectWithoutJudgesInput = {
+  where: Prisma.HackathonWhereUniqueInput
+  create: Prisma.XOR<Prisma.HackathonCreateWithoutJudgesInput, Prisma.HackathonUncheckedCreateWithoutJudgesInput>
+}
+
+export type HackathonUpsertWithoutJudgesInput = {
+  update: Prisma.XOR<Prisma.HackathonUpdateWithoutJudgesInput, Prisma.HackathonUncheckedUpdateWithoutJudgesInput>
+  create: Prisma.XOR<Prisma.HackathonCreateWithoutJudgesInput, Prisma.HackathonUncheckedCreateWithoutJudgesInput>
+  where?: Prisma.HackathonWhereInput
+}
+
+export type HackathonUpdateToOneWithWhereWithoutJudgesInput = {
+  where?: Prisma.HackathonWhereInput
+  data: Prisma.XOR<Prisma.HackathonUpdateWithoutJudgesInput, Prisma.HackathonUncheckedUpdateWithoutJudgesInput>
+}
+
+export type HackathonUpdateWithoutJudgesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  author?: Prisma.UserUpdateOneRequiredWithoutAuthoredHackathonsNestedInput
+  participants?: Prisma.HackathonParticipantUpdateManyWithoutHackathonNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUpdateManyWithoutHackathonNestedInput
+}
+
+export type HackathonUncheckedUpdateWithoutJudgesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  participants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutHackathonNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUncheckedUpdateManyWithoutHackathonNestedInput
 }
 
 export type HackathonCreateManyAuthorInput = {
@@ -704,6 +959,7 @@ export type HackathonCreateManyAuthorInput = {
   startDate: Date | string
   endDate: Date | string
   isActive?: boolean
+  scoringLockedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -715,10 +971,13 @@ export type HackathonUpdateWithoutAuthorInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.HackathonParticipantUpdateManyWithoutHackathonNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUpdateManyWithoutHackathonNestedInput
 }
 
 export type HackathonUncheckedUpdateWithoutAuthorInput = {
@@ -728,10 +987,13 @@ export type HackathonUncheckedUpdateWithoutAuthorInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   participants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutHackathonNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutHackathonNestedInput
+  criteria?: Prisma.CriterionUncheckedUpdateManyWithoutHackathonNestedInput
+  judges?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutHackathonNestedInput
 }
 
 export type HackathonUncheckedUpdateManyWithoutAuthorInput = {
@@ -741,6 +1003,7 @@ export type HackathonUncheckedUpdateManyWithoutAuthorInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  scoringLockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -753,11 +1016,15 @@ export type HackathonUncheckedUpdateManyWithoutAuthorInput = {
 export type HackathonCountOutputType = {
   participants: number
   projects: number
+  criteria: number
+  judges: number
 }
 
 export type HackathonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   participants?: boolean | HackathonCountOutputTypeCountParticipantsArgs
   projects?: boolean | HackathonCountOutputTypeCountProjectsArgs
+  criteria?: boolean | HackathonCountOutputTypeCountCriteriaArgs
+  judges?: boolean | HackathonCountOutputTypeCountJudgesArgs
 }
 
 /**
@@ -784,6 +1051,20 @@ export type HackathonCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ProjectWhereInput
 }
 
+/**
+ * HackathonCountOutputType without action
+ */
+export type HackathonCountOutputTypeCountCriteriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CriterionWhereInput
+}
+
+/**
+ * HackathonCountOutputType without action
+ */
+export type HackathonCountOutputTypeCountJudgesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HackathonJudgeWhereInput
+}
+
 
 export type HackathonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -793,11 +1074,14 @@ export type HackathonSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   endDate?: boolean
   isActive?: boolean
   authorId?: boolean
+  scoringLockedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   participants?: boolean | Prisma.Hackathon$participantsArgs<ExtArgs>
   projects?: boolean | Prisma.Hackathon$projectsArgs<ExtArgs>
+  criteria?: boolean | Prisma.Hackathon$criteriaArgs<ExtArgs>
+  judges?: boolean | Prisma.Hackathon$judgesArgs<ExtArgs>
   _count?: boolean | Prisma.HackathonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["hackathon"]>
 
@@ -809,6 +1093,7 @@ export type HackathonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   endDate?: boolean
   isActive?: boolean
   authorId?: boolean
+  scoringLockedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -822,6 +1107,7 @@ export type HackathonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   endDate?: boolean
   isActive?: boolean
   authorId?: boolean
+  scoringLockedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -835,15 +1121,18 @@ export type HackathonSelectScalar = {
   endDate?: boolean
   isActive?: boolean
   authorId?: boolean
+  scoringLockedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type HackathonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "startDate" | "endDate" | "isActive" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["hackathon"]>
+export type HackathonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "startDate" | "endDate" | "isActive" | "authorId" | "scoringLockedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["hackathon"]>
 export type HackathonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   participants?: boolean | Prisma.Hackathon$participantsArgs<ExtArgs>
   projects?: boolean | Prisma.Hackathon$projectsArgs<ExtArgs>
+  criteria?: boolean | Prisma.Hackathon$criteriaArgs<ExtArgs>
+  judges?: boolean | Prisma.Hackathon$judgesArgs<ExtArgs>
   _count?: boolean | Prisma.HackathonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type HackathonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -859,6 +1148,8 @@ export type $HackathonPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     author: Prisma.$UserPayload<ExtArgs>
     participants: Prisma.$HackathonParticipantPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
+    criteria: Prisma.$CriterionPayload<ExtArgs>[]
+    judges: Prisma.$HackathonJudgePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -868,6 +1159,7 @@ export type $HackathonPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     endDate: Date
     isActive: boolean
     authorId: string
+    scoringLockedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["hackathon"]>
@@ -1267,6 +1559,8 @@ export interface Prisma__HackathonClient<T, Null = never, ExtArgs extends runtim
   author<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   participants<T extends Prisma.Hackathon$participantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hackathon$participantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HackathonParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.Hackathon$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hackathon$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  criteria<T extends Prisma.Hackathon$criteriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hackathon$criteriaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CriterionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  judges<T extends Prisma.Hackathon$judgesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hackathon$judgesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HackathonJudgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1303,6 +1597,7 @@ export interface HackathonFieldRefs {
   readonly endDate: Prisma.FieldRef<"Hackathon", 'DateTime'>
   readonly isActive: Prisma.FieldRef<"Hackathon", 'Boolean'>
   readonly authorId: Prisma.FieldRef<"Hackathon", 'String'>
+  readonly scoringLockedAt: Prisma.FieldRef<"Hackathon", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Hackathon", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Hackathon", 'DateTime'>
 }
@@ -1751,6 +2046,54 @@ export type Hackathon$projectsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * Hackathon.criteria
+ */
+export type Hackathon$criteriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Criterion
+   */
+  select?: Prisma.CriterionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Criterion
+   */
+  omit?: Prisma.CriterionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CriterionInclude<ExtArgs> | null
+  where?: Prisma.CriterionWhereInput
+  orderBy?: Prisma.CriterionOrderByWithRelationInput | Prisma.CriterionOrderByWithRelationInput[]
+  cursor?: Prisma.CriterionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CriterionScalarFieldEnum | Prisma.CriterionScalarFieldEnum[]
+}
+
+/**
+ * Hackathon.judges
+ */
+export type Hackathon$judgesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HackathonJudge
+   */
+  select?: Prisma.HackathonJudgeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HackathonJudge
+   */
+  omit?: Prisma.HackathonJudgeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HackathonJudgeInclude<ExtArgs> | null
+  where?: Prisma.HackathonJudgeWhereInput
+  orderBy?: Prisma.HackathonJudgeOrderByWithRelationInput | Prisma.HackathonJudgeOrderByWithRelationInput[]
+  cursor?: Prisma.HackathonJudgeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HackathonJudgeScalarFieldEnum | Prisma.HackathonJudgeScalarFieldEnum[]
 }
 
 /**

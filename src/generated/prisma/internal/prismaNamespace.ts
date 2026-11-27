@@ -403,7 +403,10 @@ export const ModelName = {
   Verification: 'Verification',
   Hackathon: 'Hackathon',
   HackathonParticipant: 'HackathonParticipant',
-  Project: 'Project'
+  Project: 'Project',
+  Criterion: 'Criterion',
+  HackathonJudge: 'HackathonJudge',
+  Score: 'Score'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "hackathon" | "hackathonParticipant" | "project"
+    modelProps: "user" | "session" | "account" | "verification" | "hackathon" | "hackathonParticipant" | "project" | "criterion" | "hackathonJudge" | "score"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -941,6 +944,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Criterion: {
+      payload: Prisma.$CriterionPayload<ExtArgs>
+      fields: Prisma.CriterionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CriterionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CriterionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>
+        }
+        findFirst: {
+          args: Prisma.CriterionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CriterionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>
+        }
+        findMany: {
+          args: Prisma.CriterionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>[]
+        }
+        create: {
+          args: Prisma.CriterionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>
+        }
+        createMany: {
+          args: Prisma.CriterionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CriterionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>[]
+        }
+        delete: {
+          args: Prisma.CriterionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>
+        }
+        update: {
+          args: Prisma.CriterionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>
+        }
+        deleteMany: {
+          args: Prisma.CriterionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CriterionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CriterionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>[]
+        }
+        upsert: {
+          args: Prisma.CriterionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CriterionPayload>
+        }
+        aggregate: {
+          args: Prisma.CriterionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCriterion>
+        }
+        groupBy: {
+          args: Prisma.CriterionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CriterionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CriterionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CriterionCountAggregateOutputType> | number
+        }
+      }
+    }
+    HackathonJudge: {
+      payload: Prisma.$HackathonJudgePayload<ExtArgs>
+      fields: Prisma.HackathonJudgeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HackathonJudgeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HackathonJudgeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>
+        }
+        findFirst: {
+          args: Prisma.HackathonJudgeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HackathonJudgeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>
+        }
+        findMany: {
+          args: Prisma.HackathonJudgeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>[]
+        }
+        create: {
+          args: Prisma.HackathonJudgeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>
+        }
+        createMany: {
+          args: Prisma.HackathonJudgeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HackathonJudgeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>[]
+        }
+        delete: {
+          args: Prisma.HackathonJudgeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>
+        }
+        update: {
+          args: Prisma.HackathonJudgeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>
+        }
+        deleteMany: {
+          args: Prisma.HackathonJudgeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HackathonJudgeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HackathonJudgeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>[]
+        }
+        upsert: {
+          args: Prisma.HackathonJudgeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HackathonJudgePayload>
+        }
+        aggregate: {
+          args: Prisma.HackathonJudgeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHackathonJudge>
+        }
+        groupBy: {
+          args: Prisma.HackathonJudgeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HackathonJudgeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HackathonJudgeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HackathonJudgeCountAggregateOutputType> | number
+        }
+      }
+    }
+    Score: {
+      payload: Prisma.$ScorePayload<ExtArgs>
+      fields: Prisma.ScoreFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ScoreFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ScoreFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>
+        }
+        findFirst: {
+          args: Prisma.ScoreFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ScoreFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>
+        }
+        findMany: {
+          args: Prisma.ScoreFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>[]
+        }
+        create: {
+          args: Prisma.ScoreCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>
+        }
+        createMany: {
+          args: Prisma.ScoreCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ScoreCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>[]
+        }
+        delete: {
+          args: Prisma.ScoreDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>
+        }
+        update: {
+          args: Prisma.ScoreUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>
+        }
+        deleteMany: {
+          args: Prisma.ScoreDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ScoreUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ScoreUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>[]
+        }
+        upsert: {
+          args: Prisma.ScoreUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScorePayload>
+        }
+        aggregate: {
+          args: Prisma.ScoreAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateScore>
+        }
+        groupBy: {
+          args: Prisma.ScoreGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScoreGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ScoreCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScoreCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1047,6 +1272,7 @@ export const HackathonScalarFieldEnum = {
   endDate: 'endDate',
   isActive: 'isActive',
   authorId: 'authorId',
+  scoringLockedAt: 'scoringLockedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1078,6 +1304,42 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const CriterionScalarFieldEnum = {
+  id: 'id',
+  hackathonId: 'hackathonId',
+  name: 'name',
+  weight: 'weight',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CriterionScalarFieldEnum = (typeof CriterionScalarFieldEnum)[keyof typeof CriterionScalarFieldEnum]
+
+
+export const HackathonJudgeScalarFieldEnum = {
+  id: 'id',
+  hackathonId: 'hackathonId',
+  userId: 'userId',
+  assignedAt: 'assignedAt'
+} as const
+
+export type HackathonJudgeScalarFieldEnum = (typeof HackathonJudgeScalarFieldEnum)[keyof typeof HackathonJudgeScalarFieldEnum]
+
+
+export const ScoreScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  judgeId: 'judgeId',
+  criterionId: 'criterionId',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ScoreScalarFieldEnum = (typeof ScoreScalarFieldEnum)[keyof typeof ScoreScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1184,6 +1446,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -1344,6 +1620,9 @@ export type GlobalOmitConfig = {
   hackathon?: Prisma.HackathonOmit
   hackathonParticipant?: Prisma.HackathonParticipantOmit
   project?: Prisma.ProjectOmit
+  criterion?: Prisma.CriterionOmit
+  hackathonJudge?: Prisma.HackathonJudgeOmit
+  score?: Prisma.ScoreOmit
 }
 
 /* Types for Logging */

@@ -67,6 +67,21 @@ export class HackathonService {
       throw new BadRequestException('This hackathon has already ended');
     }
 
+    const judge = await this.prisma.hackathonJudge.findUnique({
+      where: {
+        hackathonId_userId: {
+          hackathonId,
+          userId,
+        },
+      },
+    });
+
+    if (judge) {
+      throw new BadRequestException(
+        'A judge cannot join the same hackathon as a participant',
+      );
+    }
+
     try {
       return await this.prisma.hackathonParticipant.create({
         data: {
@@ -120,20 +135,38 @@ export class HackathonService {
   async remove(id: string) {
     await this.findOne(id);
 
-    const projectCount = await this.prisma.project.count({
-      where: { hackathonId: id },
-    });
-
-    if (projectCount > 0) {
-      throw new ConflictException(
-        'Cannot delete a hackathon that still has projects',
-      );
-    }
-
     try {
-      return await this.prisma.hackathon.delete({
-        where: { id },
-        include: hackathonInclude,
+      return await this.prisma.$transaction(async (tx) => {
+        const criteriaCount = await tx.criterion.count({
+          where: { hackathonId: id },
+        });
+        const judgeCount = await tx.hackathonJudge.count({
+          where: { hackathonId: id },
+        });
+        const scoreCount = await tx.score.count({
+          where: { project: { hackathonId: id } },
+        });
+
+        if (criteriaCount > 0 || judgeCount > 0 || scoreCount > 0) {
+          throw new ConflictException(
+            'Cannot delete a hackathon that still has criteria, judges, or scores',
+          );
+        }
+
+        const projectCount = await tx.project.count({
+          where: { hackathonId: id },
+        });
+
+        if (projectCount > 0) {
+          throw new ConflictException(
+            'Cannot delete a hackathon that still has projects',
+          );
+        }
+
+        return tx.hackathon.delete({
+          where: { id },
+          include: hackathonInclude,
+        });
       });
     } catch (error) {
       if (

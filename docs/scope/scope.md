@@ -16,7 +16,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 | 3 | Join flow | Already built | existing |
 | 4 | Platform plumbing | Already built | existing |
 | 5 | Project submissions | Slice 1 | done |
-| 6 | Judging and scoring | Slice 1 | planned |
+| 6 | Judging and scoring | Slice 1 | in-progress |
 | 7 | Results and standings | Slice 1 | planned |
 | 8 | Admin access and event setup | Slice 2 | planned |
 | 9 | Join safeguards and capacity | Slice 2 | planned |
@@ -53,10 +53,18 @@ code in `src/module/project/`
   - [x] Publish, unpublish, delete, satisfies AC-8 and AC-9
   - [x] Hackathon delete block and smoke pass, satisfies AC-10 and AC-1 through AC-12
 
-### 6. Judging and scoring · needs a decision
+### 6. Judging and scoring · in-progress
 Organizers define criteria with weights, assign judges, and judges score each project. This closes the loop from a submission to a comparable score.
 **Done when:** an organizer sets criteria and judges, a judge scores every project once per criterion, and each project shows a weighted total.
-- [ ] Design it (spec): `/architect judging and scoring`
+Spec: [0002](../specs/0002-judging-and-scoring/index.md)
+code in `src/module/judging/`
+- [x] Design it (spec): `/architect judging and scoring`
+- [x] Build it: `/develop judging and scoring`
+  - [x] Schema, DTOs, and validation, satisfies AC-1, AC-8, AC-9, AC-12
+  - [x] Criteria and judge setup thread, satisfies AC-1 through AC-6 and AC-17
+  - [x] Score submission and total read thread, satisfies AC-7 through AC-12
+  - [x] Freeze, lock, and delete guards, satisfies AC-3, AC-6, AC-13, AC-14, AC-15, AC-16
+  - [x] Smoke pass, satisfies AC-1 through AC-17
 
 ### 7. Results and standings · needs a decision
 Organizers publish the final order so participants and organizers see winners and ranks. Results stay hidden until they are published.

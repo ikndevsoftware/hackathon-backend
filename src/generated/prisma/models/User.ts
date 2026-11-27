@@ -211,6 +211,8 @@ export type UserWhereInput = {
   authoredHackathons?: Prisma.HackathonListRelationFilter
   hackathonParticipants?: Prisma.HackathonParticipantListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  judgeAssignments?: Prisma.HackathonJudgeListRelationFilter
+  scores?: Prisma.ScoreListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -227,6 +229,8 @@ export type UserOrderByWithRelationInput = {
   authoredHackathons?: Prisma.HackathonOrderByRelationAggregateInput
   hackathonParticipants?: Prisma.HackathonParticipantOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
+  judgeAssignments?: Prisma.HackathonJudgeOrderByRelationAggregateInput
+  scores?: Prisma.ScoreOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -246,6 +250,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   authoredHackathons?: Prisma.HackathonListRelationFilter
   hackathonParticipants?: Prisma.HackathonParticipantListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  judgeAssignments?: Prisma.HackathonJudgeListRelationFilter
+  scores?: Prisma.ScoreListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -290,6 +296,8 @@ export type UserCreateInput = {
   authoredHackathons?: Prisma.HackathonCreateNestedManyWithoutAuthorInput
   hackathonParticipants?: Prisma.HackathonParticipantCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutJudgeInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -306,6 +314,8 @@ export type UserUncheckedCreateInput = {
   authoredHackathons?: Prisma.HackathonUncheckedCreateNestedManyWithoutAuthorInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutJudgeInput
 }
 
 export type UserUpdateInput = {
@@ -322,6 +332,8 @@ export type UserUpdateInput = {
   authoredHackathons?: Prisma.HackathonUpdateManyWithoutAuthorNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -338,6 +350,8 @@ export type UserUncheckedUpdateInput = {
   authoredHackathons?: Prisma.HackathonUncheckedUpdateManyWithoutAuthorNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -501,6 +515,34 @@ export type UserUpdateOneRequiredWithoutProjectsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProjectsInput, Prisma.UserUpdateWithoutProjectsInput>, Prisma.UserUncheckedUpdateWithoutProjectsInput>
 }
 
+export type UserCreateNestedOneWithoutJudgeAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJudgeAssignmentsInput, Prisma.UserUncheckedCreateWithoutJudgeAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJudgeAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutJudgeAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutJudgeAssignmentsInput, Prisma.UserUncheckedCreateWithoutJudgeAssignmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutJudgeAssignmentsInput
+  upsert?: Prisma.UserUpsertWithoutJudgeAssignmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJudgeAssignmentsInput, Prisma.UserUpdateWithoutJudgeAssignmentsInput>, Prisma.UserUncheckedUpdateWithoutJudgeAssignmentsInput>
+}
+
+export type UserCreateNestedOneWithoutScoresInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutScoresInput, Prisma.UserUncheckedCreateWithoutScoresInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutScoresInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutScoresNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutScoresInput, Prisma.UserUncheckedCreateWithoutScoresInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutScoresInput
+  upsert?: Prisma.UserUpsertWithoutScoresInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutScoresInput, Prisma.UserUpdateWithoutScoresInput>, Prisma.UserUncheckedUpdateWithoutScoresInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -514,6 +556,8 @@ export type UserCreateWithoutSessionsInput = {
   authoredHackathons?: Prisma.HackathonCreateNestedManyWithoutAuthorInput
   hackathonParticipants?: Prisma.HackathonParticipantCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutJudgeInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -529,6 +573,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   authoredHackathons?: Prisma.HackathonUncheckedCreateNestedManyWithoutAuthorInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutJudgeInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -560,6 +606,8 @@ export type UserUpdateWithoutSessionsInput = {
   authoredHackathons?: Prisma.HackathonUpdateManyWithoutAuthorNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -575,6 +623,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   authoredHackathons?: Prisma.HackathonUncheckedUpdateManyWithoutAuthorNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -590,6 +640,8 @@ export type UserCreateWithoutAccountsInput = {
   authoredHackathons?: Prisma.HackathonCreateNestedManyWithoutAuthorInput
   hackathonParticipants?: Prisma.HackathonParticipantCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutJudgeInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -605,6 +657,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   authoredHackathons?: Prisma.HackathonUncheckedCreateNestedManyWithoutAuthorInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutJudgeInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -636,6 +690,8 @@ export type UserUpdateWithoutAccountsInput = {
   authoredHackathons?: Prisma.HackathonUpdateManyWithoutAuthorNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -651,6 +707,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   authoredHackathons?: Prisma.HackathonUncheckedUpdateManyWithoutAuthorNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserCreateWithoutAuthoredHackathonsInput = {
@@ -666,6 +724,8 @@ export type UserCreateWithoutAuthoredHackathonsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   hackathonParticipants?: Prisma.HackathonParticipantCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutJudgeInput
 }
 
 export type UserUncheckedCreateWithoutAuthoredHackathonsInput = {
@@ -681,6 +741,8 @@ export type UserUncheckedCreateWithoutAuthoredHackathonsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutJudgeInput
 }
 
 export type UserCreateOrConnectWithoutAuthoredHackathonsInput = {
@@ -712,6 +774,8 @@ export type UserUpdateWithoutAuthoredHackathonsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthoredHackathonsInput = {
@@ -727,6 +791,8 @@ export type UserUncheckedUpdateWithoutAuthoredHackathonsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserCreateWithoutHackathonParticipantsInput = {
@@ -742,6 +808,8 @@ export type UserCreateWithoutHackathonParticipantsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   authoredHackathons?: Prisma.HackathonCreateNestedManyWithoutAuthorInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutJudgeInput
 }
 
 export type UserUncheckedCreateWithoutHackathonParticipantsInput = {
@@ -757,6 +825,8 @@ export type UserUncheckedCreateWithoutHackathonParticipantsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   authoredHackathons?: Prisma.HackathonUncheckedCreateNestedManyWithoutAuthorInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutJudgeInput
 }
 
 export type UserCreateOrConnectWithoutHackathonParticipantsInput = {
@@ -788,6 +858,8 @@ export type UserUpdateWithoutHackathonParticipantsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   authoredHackathons?: Prisma.HackathonUpdateManyWithoutAuthorNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHackathonParticipantsInput = {
@@ -803,6 +875,8 @@ export type UserUncheckedUpdateWithoutHackathonParticipantsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   authoredHackathons?: Prisma.HackathonUncheckedUpdateManyWithoutAuthorNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -818,6 +892,8 @@ export type UserCreateWithoutProjectsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   authoredHackathons?: Prisma.HackathonCreateNestedManyWithoutAuthorInput
   hackathonParticipants?: Prisma.HackathonParticipantCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutJudgeInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -833,6 +909,8 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   authoredHackathons?: Prisma.HackathonUncheckedCreateNestedManyWithoutAuthorInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutJudgeInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -864,6 +942,8 @@ export type UserUpdateWithoutProjectsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   authoredHackathons?: Prisma.HackathonUpdateManyWithoutAuthorNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutJudgeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -879,6 +959,176 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   authoredHackathons?: Prisma.HackathonUncheckedUpdateManyWithoutAuthorNestedInput
   hackathonParticipants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutJudgeNestedInput
+}
+
+export type UserCreateWithoutJudgeAssignmentsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.Role
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authoredHackathons?: Prisma.HackathonCreateNestedManyWithoutAuthorInput
+  hackathonParticipants?: Prisma.HackathonParticipantCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutJudgeInput
+}
+
+export type UserUncheckedCreateWithoutJudgeAssignmentsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.Role
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authoredHackathons?: Prisma.HackathonUncheckedCreateNestedManyWithoutAuthorInput
+  hackathonParticipants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutJudgeInput
+}
+
+export type UserCreateOrConnectWithoutJudgeAssignmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutJudgeAssignmentsInput, Prisma.UserUncheckedCreateWithoutJudgeAssignmentsInput>
+}
+
+export type UserUpsertWithoutJudgeAssignmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutJudgeAssignmentsInput, Prisma.UserUncheckedUpdateWithoutJudgeAssignmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutJudgeAssignmentsInput, Prisma.UserUncheckedCreateWithoutJudgeAssignmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutJudgeAssignmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutJudgeAssignmentsInput, Prisma.UserUncheckedUpdateWithoutJudgeAssignmentsInput>
+}
+
+export type UserUpdateWithoutJudgeAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authoredHackathons?: Prisma.HackathonUpdateManyWithoutAuthorNestedInput
+  hackathonParticipants?: Prisma.HackathonParticipantUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutJudgeNestedInput
+}
+
+export type UserUncheckedUpdateWithoutJudgeAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authoredHackathons?: Prisma.HackathonUncheckedUpdateManyWithoutAuthorNestedInput
+  hackathonParticipants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutJudgeNestedInput
+}
+
+export type UserCreateWithoutScoresInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.Role
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authoredHackathons?: Prisma.HackathonCreateNestedManyWithoutAuthorInput
+  hackathonParticipants?: Prisma.HackathonParticipantCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutScoresInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  role?: $Enums.Role
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authoredHackathons?: Prisma.HackathonUncheckedCreateNestedManyWithoutAuthorInput
+  hackathonParticipants?: Prisma.HackathonParticipantUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutScoresInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutScoresInput, Prisma.UserUncheckedCreateWithoutScoresInput>
+}
+
+export type UserUpsertWithoutScoresInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutScoresInput, Prisma.UserUncheckedUpdateWithoutScoresInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutScoresInput, Prisma.UserUncheckedCreateWithoutScoresInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutScoresInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutScoresInput, Prisma.UserUncheckedUpdateWithoutScoresInput>
+}
+
+export type UserUpdateWithoutScoresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authoredHackathons?: Prisma.HackathonUpdateManyWithoutAuthorNestedInput
+  hackathonParticipants?: Prisma.HackathonParticipantUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutScoresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authoredHackathons?: Prisma.HackathonUncheckedUpdateManyWithoutAuthorNestedInput
+  hackathonParticipants?: Prisma.HackathonParticipantUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  judgeAssignments?: Prisma.HackathonJudgeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -892,6 +1142,8 @@ export type UserCountOutputType = {
   authoredHackathons: number
   hackathonParticipants: number
   projects: number
+  judgeAssignments: number
+  scores: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -900,6 +1152,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   authoredHackathons?: boolean | UserCountOutputTypeCountAuthoredHackathonsArgs
   hackathonParticipants?: boolean | UserCountOutputTypeCountHackathonParticipantsArgs
   projects?: boolean | UserCountOutputTypeCountProjectsArgs
+  judgeAssignments?: boolean | UserCountOutputTypeCountJudgeAssignmentsArgs
+  scores?: boolean | UserCountOutputTypeCountScoresArgs
 }
 
 /**
@@ -947,6 +1201,20 @@ export type UserCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ProjectWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountJudgeAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HackathonJudgeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ScoreWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -962,6 +1230,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   authoredHackathons?: boolean | Prisma.User$authoredHackathonsArgs<ExtArgs>
   hackathonParticipants?: boolean | Prisma.User$hackathonParticipantsArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
+  judgeAssignments?: boolean | Prisma.User$judgeAssignmentsArgs<ExtArgs>
+  scores?: boolean | Prisma.User$scoresArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1005,6 +1275,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   authoredHackathons?: boolean | Prisma.User$authoredHackathonsArgs<ExtArgs>
   hackathonParticipants?: boolean | Prisma.User$hackathonParticipantsArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
+  judgeAssignments?: boolean | Prisma.User$judgeAssignmentsArgs<ExtArgs>
+  scores?: boolean | Prisma.User$scoresArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1018,6 +1290,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     authoredHackathons: Prisma.$HackathonPayload<ExtArgs>[]
     hackathonParticipants: Prisma.$HackathonParticipantPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
+    judgeAssignments: Prisma.$HackathonJudgePayload<ExtArgs>[]
+    scores: Prisma.$ScorePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1427,6 +1701,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   authoredHackathons<T extends Prisma.User$authoredHackathonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authoredHackathonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HackathonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   hackathonParticipants<T extends Prisma.User$hackathonParticipantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$hackathonParticipantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HackathonParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.User$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  judgeAssignments<T extends Prisma.User$judgeAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$judgeAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HackathonJudgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  scores<T extends Prisma.User$scoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1974,6 +2250,54 @@ export type User$projectsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * User.judgeAssignments
+ */
+export type User$judgeAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HackathonJudge
+   */
+  select?: Prisma.HackathonJudgeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HackathonJudge
+   */
+  omit?: Prisma.HackathonJudgeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HackathonJudgeInclude<ExtArgs> | null
+  where?: Prisma.HackathonJudgeWhereInput
+  orderBy?: Prisma.HackathonJudgeOrderByWithRelationInput | Prisma.HackathonJudgeOrderByWithRelationInput[]
+  cursor?: Prisma.HackathonJudgeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HackathonJudgeScalarFieldEnum | Prisma.HackathonJudgeScalarFieldEnum[]
+}
+
+/**
+ * User.scores
+ */
+export type User$scoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Score
+   */
+  select?: Prisma.ScoreSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Score
+   */
+  omit?: Prisma.ScoreOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ScoreInclude<ExtArgs> | null
+  where?: Prisma.ScoreWhereInput
+  orderBy?: Prisma.ScoreOrderByWithRelationInput | Prisma.ScoreOrderByWithRelationInput[]
+  cursor?: Prisma.ScoreWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ScoreScalarFieldEnum | Prisma.ScoreScalarFieldEnum[]
 }
 
 /**
