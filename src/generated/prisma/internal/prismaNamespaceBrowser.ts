@@ -57,7 +57,10 @@ export const ModelName = {
   Verification: 'Verification',
   Hackathon: 'Hackathon',
   HackathonParticipant: 'HackathonParticipant',
-  Project: 'Project'
+  Project: 'Project',
+  Criterion: 'Criterion',
+  HackathonJudge: 'HackathonJudge',
+  Score: 'Score'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -143,6 +146,7 @@ export const HackathonScalarFieldEnum = {
   endDate: 'endDate',
   isActive: 'isActive',
   authorId: 'authorId',
+  scoringLockedAt: 'scoringLockedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -174,6 +178,42 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const CriterionScalarFieldEnum = {
+  id: 'id',
+  hackathonId: 'hackathonId',
+  name: 'name',
+  weight: 'weight',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CriterionScalarFieldEnum = (typeof CriterionScalarFieldEnum)[keyof typeof CriterionScalarFieldEnum]
+
+
+export const HackathonJudgeScalarFieldEnum = {
+  id: 'id',
+  hackathonId: 'hackathonId',
+  userId: 'userId',
+  assignedAt: 'assignedAt'
+} as const
+
+export type HackathonJudgeScalarFieldEnum = (typeof HackathonJudgeScalarFieldEnum)[keyof typeof HackathonJudgeScalarFieldEnum]
+
+
+export const ScoreScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  judgeId: 'judgeId',
+  criterionId: 'criterionId',
+  value: 'value',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ScoreScalarFieldEnum = (typeof ScoreScalarFieldEnum)[keyof typeof ScoreScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -76,3 +76,18 @@ export type HackathonParticipant = Prisma.HackathonParticipantModel
  * 
  */
 export type Project = Prisma.ProjectModel
+/**
+ * Model Criterion
+ * 
+ */
+export type Criterion = Prisma.CriterionModel
+/**
+ * Model HackathonJudge
+ * 
+ */
+export type HackathonJudge = Prisma.HackathonJudgeModel
+/**
+ * Model Score
+ * 
+ */
+export type Score = Prisma.ScoreModel

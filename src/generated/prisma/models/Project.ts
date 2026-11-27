@@ -224,6 +224,7 @@ export type ProjectWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   hackathon?: Prisma.XOR<Prisma.HackathonScalarRelationFilter, Prisma.HackathonWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  scores?: Prisma.ScoreListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -239,6 +240,7 @@ export type ProjectOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   hackathon?: Prisma.HackathonOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  scores?: Prisma.ScoreOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -258,6 +260,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   hackathon?: Prisma.XOR<Prisma.HackathonScalarRelationFilter, Prisma.HackathonWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  scores?: Prisma.ScoreListRelationFilter
 }, "id" | "hackathonId_userId">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -303,6 +306,7 @@ export type ProjectCreateInput = {
   updatedAt?: Date | string
   hackathon: Prisma.HackathonCreateNestedOneWithoutProjectsInput
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -316,6 +320,7 @@ export type ProjectUncheckedCreateInput = {
   status?: $Enums.ProjectStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -329,6 +334,7 @@ export type ProjectUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hackathon?: Prisma.HackathonUpdateOneRequiredWithoutProjectsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -342,6 +348,7 @@ export type ProjectUncheckedUpdateInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -435,6 +442,11 @@ export type ProjectMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type ProjectScalarRelationFilter = {
+  is?: Prisma.ProjectWhereInput
+  isNot?: Prisma.ProjectWhereInput
+}
+
 export type ProjectCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutUserInput, Prisma.ProjectUncheckedCreateWithoutUserInput> | Prisma.ProjectCreateWithoutUserInput[] | Prisma.ProjectUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutUserInput | Prisma.ProjectCreateOrConnectWithoutUserInput[]
@@ -523,6 +535,20 @@ export type EnumProjectStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProjectStatus
 }
 
+export type ProjectCreateNestedOneWithoutScoresInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutScoresInput, Prisma.ProjectUncheckedCreateWithoutScoresInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutScoresInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutScoresNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutScoresInput, Prisma.ProjectUncheckedCreateWithoutScoresInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutScoresInput
+  upsert?: Prisma.ProjectUpsertWithoutScoresInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutScoresInput, Prisma.ProjectUpdateWithoutScoresInput>, Prisma.ProjectUncheckedUpdateWithoutScoresInput>
+}
+
 export type ProjectCreateWithoutUserInput = {
   id?: string
   title: string
@@ -533,6 +559,7 @@ export type ProjectCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   hackathon: Prisma.HackathonCreateNestedOneWithoutProjectsInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutUserInput = {
@@ -545,6 +572,7 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   status?: $Enums.ProjectStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutUserInput = {
@@ -599,6 +627,7 @@ export type ProjectCreateWithoutHackathonInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutHackathonInput = {
@@ -611,6 +640,7 @@ export type ProjectUncheckedCreateWithoutHackathonInput = {
   status?: $Enums.ProjectStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutHackathonInput = {
@@ -639,6 +669,74 @@ export type ProjectUpdateManyWithWhereWithoutHackathonInput = {
   data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutHackathonInput>
 }
 
+export type ProjectCreateWithoutScoresInput = {
+  id?: string
+  title: string
+  description?: string | null
+  repoUrl: string
+  demoUrl?: string | null
+  status?: $Enums.ProjectStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  hackathon: Prisma.HackathonCreateNestedOneWithoutProjectsInput
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+}
+
+export type ProjectUncheckedCreateWithoutScoresInput = {
+  id?: string
+  hackathonId: string
+  userId: string
+  title: string
+  description?: string | null
+  repoUrl: string
+  demoUrl?: string | null
+  status?: $Enums.ProjectStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ProjectCreateOrConnectWithoutScoresInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutScoresInput, Prisma.ProjectUncheckedCreateWithoutScoresInput>
+}
+
+export type ProjectUpsertWithoutScoresInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutScoresInput, Prisma.ProjectUncheckedUpdateWithoutScoresInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutScoresInput, Prisma.ProjectUncheckedCreateWithoutScoresInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutScoresInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutScoresInput, Prisma.ProjectUncheckedUpdateWithoutScoresInput>
+}
+
+export type ProjectUpdateWithoutScoresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repoUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  demoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  hackathon?: Prisma.HackathonUpdateOneRequiredWithoutProjectsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutScoresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  hackathonId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repoUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  demoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type ProjectCreateManyUserInput = {
   id?: string
   hackathonId: string
@@ -661,6 +759,7 @@ export type ProjectUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hackathon?: Prisma.HackathonUpdateOneRequiredWithoutProjectsNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutUserInput = {
@@ -673,6 +772,7 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutUserInput = {
@@ -709,6 +809,7 @@ export type ProjectUpdateWithoutHackathonInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutHackathonInput = {
@@ -721,6 +822,7 @@ export type ProjectUncheckedUpdateWithoutHackathonInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutHackathonInput = {
@@ -736,6 +838,35 @@ export type ProjectUncheckedUpdateManyWithoutHackathonInput = {
 }
 
 
+/**
+ * Count Type ProjectCountOutputType
+ */
+
+export type ProjectCountOutputType = {
+  scores: number
+}
+
+export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  scores?: boolean | ProjectCountOutputTypeCountScoresArgs
+}
+
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectCountOutputType
+   */
+  select?: Prisma.ProjectCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ScoreWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -750,6 +881,8 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   hackathon?: boolean | Prisma.HackathonDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  scores?: boolean | Prisma.Project$scoresArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -799,6 +932,8 @@ export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   hackathon?: boolean | Prisma.HackathonDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  scores?: boolean | Prisma.Project$scoresArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   hackathon?: boolean | Prisma.HackathonDefaultArgs<ExtArgs>
@@ -814,6 +949,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     hackathon: Prisma.$HackathonPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    scores: Prisma.$ScorePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1222,6 +1358,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   hackathon<T extends Prisma.HackathonDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HackathonDefaultArgs<ExtArgs>>): Prisma.Prisma__HackathonClient<runtime.Types.Result.GetResult<Prisma.$HackathonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  scores<T extends Prisma.Project$scoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1659,6 +1796,30 @@ export type ProjectDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Projects to delete.
    */
   limit?: number
+}
+
+/**
+ * Project.scores
+ */
+export type Project$scoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Score
+   */
+  select?: Prisma.ScoreSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Score
+   */
+  omit?: Prisma.ScoreOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ScoreInclude<ExtArgs> | null
+  where?: Prisma.ScoreWhereInput
+  orderBy?: Prisma.ScoreOrderByWithRelationInput | Prisma.ScoreOrderByWithRelationInput[]
+  cursor?: Prisma.ScoreWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ScoreScalarFieldEnum | Prisma.ScoreScalarFieldEnum[]
 }
 
 /**

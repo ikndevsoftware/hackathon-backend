@@ -129,33 +129,44 @@ export class ProjectService {
   }
 
   async publish(hackathonId: string, projectId: string, userId: string) {
-    return this.setStatus(hackathonId, projectId, userId, 'PUBLISHED');
-  }
-
-  async unpublish(hackathonId: string, projectId: string, userId: string) {
-    return this.setStatus(hackathonId, projectId, userId, 'DRAFT');
-  }
-
-  async remove(hackathonId: string, projectId: string, userId: string) {
-    await this.requireEditableProject(hackathonId, projectId, userId);
-
-    return this.prisma.project.delete({
-      where: { id: projectId },
-      include: projectInclude,
-    });
-  }
-
-  private async setStatus(
-    hackathonId: string,
-    projectId: string,
-    userId: string,
-    status: 'DRAFT' | 'PUBLISHED',
-  ) {
     await this.requireEditableProject(hackathonId, projectId, userId);
 
     return this.prisma.project.update({
       where: { id: projectId },
-      data: { status },
+      data: { status: 'PUBLISHED' },
+      include: projectInclude,
+    });
+  }
+
+  async unpublish(hackathonId: string, projectId: string, userId: string) {
+    const project = await this.requireOwnedProject(
+      hackathonId,
+      projectId,
+      userId,
+    );
+
+    await this.assertNoScores(project.id, 'unpublish');
+    this.assertBeforeEndDate(project.hackathon.endDate);
+
+    return this.prisma.project.update({
+      where: { id: projectId },
+      data: { status: 'DRAFT' },
+      include: projectInclude,
+    });
+  }
+
+  async remove(hackathonId: string, projectId: string, userId: string) {
+    const project = await this.requireOwnedProject(
+      hackathonId,
+      projectId,
+      userId,
+    );
+
+    await this.assertNoScores(project.id, 'delete');
+    this.assertBeforeEndDate(project.hackathon.endDate);
+
+    return this.prisma.project.delete({
+      where: { id: projectId },
       include: projectInclude,
     });
   }
@@ -179,6 +190,22 @@ export class ProjectService {
     projectId: string,
     userId: string,
   ) {
+    const project = await this.requireOwnedProject(
+      hackathonId,
+      projectId,
+      userId,
+    );
+
+    this.assertBeforeEndDate(project.hackathon.endDate);
+
+    return project;
+  }
+
+  private async requireOwnedProject(
+    hackathonId: string,
+    projectId: string,
+    userId: string,
+  ) {
     const project = await this.prisma.project.findUnique({
       where: { id: projectId },
       include: { hackathon: true },
@@ -192,11 +219,30 @@ export class ProjectService {
       throw new ForbiddenException('You can only change your own project');
     }
 
-    if (project.hackathon.endDate.getTime() <= Date.now()) {
+    return project;
+  }
+
+  private assertBeforeEndDate(endDate: Date) {
+    if (endDate.getTime() <= Date.now()) {
       throw new BadRequestException('This hackathon has already ended');
     }
+  }
 
-    return project;
+  private async assertNoScores(
+    projectId: string,
+    action: 'unpublish' | 'delete',
+  ) {
+    const scoreCount = await this.prisma.score.count({
+      where: { projectId },
+    });
+
+    if (scoreCount > 0) {
+      throw new ConflictException(
+        action === 'delete'
+          ? 'Cannot delete a project that already has scores'
+          : 'Cannot unpublish a project that already has scores',
+      );
+    }
   }
 
   private isAdmin(role?: string | string[]) {

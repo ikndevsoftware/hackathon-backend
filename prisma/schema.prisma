@@ -36,6 +36,8 @@ model User {
   authoredHackathons    Hackathon[]
   hackathonParticipants HackathonParticipant[]
   projects              Project[]
+  judgeAssignments      HackathonJudge[]
+  scores                Score[]
 
   @@unique([email])
   @@map("user")
@@ -90,18 +92,21 @@ model Verification {
 }
 
 model Hackathon {
-  id           String                 @id @default(cuid())
-  name         String
-  description  String?
-  startDate    DateTime
-  endDate      DateTime
-  isActive     Boolean                @default(false)
-  authorId     String
-  author       User                   @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  participants HackathonParticipant[]
-  projects     Project[]
-  createdAt    DateTime               @default(now())
-  updatedAt    DateTime               @updatedAt
+  id              String                 @id @default(cuid())
+  name            String
+  description     String?
+  startDate       DateTime
+  endDate         DateTime
+  isActive        Boolean                @default(false)
+  authorId        String
+  author          User                   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  participants    HackathonParticipant[]
+  projects        Project[]
+  criteria        Criterion[]
+  judges          HackathonJudge[]
+  scoringLockedAt DateTime?
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
 
   @@index([authorId])
   @@map("hackathon")
@@ -133,9 +138,58 @@ model Project {
   updatedAt   DateTime      @updatedAt
   hackathon   Hackathon     @relation(fields: [hackathonId], references: [id], onDelete: Restrict)
   user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scores      Score[]
 
   @@unique([hackathonId, userId])
   @@index([hackathonId])
   @@index([userId])
   @@map("project")
+}
+
+model Criterion {
+  id          String    @id @default(cuid())
+  hackathonId String
+  name        String
+  weight      Int
+  position    Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  hackathon   Hackathon @relation(fields: [hackathonId], references: [id], onDelete: Restrict)
+  scores      Score[]
+
+  @@unique([hackathonId, name])
+  @@index([hackathonId])
+  @@map("criterion")
+}
+
+model HackathonJudge {
+  id          String    @id @default(cuid())
+  hackathonId String
+  userId      String
+  assignedAt  DateTime  @default(now())
+  hackathon   Hackathon @relation(fields: [hackathonId], references: [id], onDelete: Restrict)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([hackathonId, userId])
+  @@index([userId])
+  @@map("hackathon_judge")
+}
+
+model Score {
+  id          String    @id @default(cuid())
+  projectId   String
+  judgeId     String
+  criterionId String
+  value       Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  judge       User      @relation(fields: [judgeId], references: [id], onDelete: Cascade)
+  criterion   Criterion @relation(fields: [criterionId], references: [id], onDelete: Restrict)
+
+  @@unique([judgeId, projectId, criterionId])
+  @@index([projectId])
+  @@index([judgeId])
+  @@index([criterionId])
+  @@map("score")
 }
